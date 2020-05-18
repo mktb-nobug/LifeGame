@@ -2,27 +2,15 @@ package com.mktb.nobug.GameCore;
 
 import com.mktb.nobug.io.Input;
 
-import java.util.Random;
-
 public class GameService {
 
-    //随机生成图像
+    //生成图像
     public static Cell initMap(int row, int col,int flag) {
         Cell cell = new Cell(row, col);
         if (flag == 1) {
-            Input.getCells(cell, row, col);
+            Input.getCellsFromeFile(cell, row, col);
         } else {
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < col; j++) {
-                    Random ran = new Random();
-                    int status = ran.nextInt(4);
-                    if (status == 1) {
-                        cell.setCell(i, j, 1);
-                    } else {
-                        cell.setCell(i, j, 0);
-                    }
-                }
-            }
+            Input.getCellsRandom(cell, row, col);
         }
 
         return cell;

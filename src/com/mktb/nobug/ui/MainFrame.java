@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
             super(title);
 
             setLocation(500, 200);
-            setSize(400, 100);
+            setSize(500, 100);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             mainPanel = new JPanel();
@@ -103,15 +103,15 @@ public class MainFrame extends JFrame {
         allPanel.setLayout(new BorderLayout(0, 0));
         gridPanel.setLayout(new GridLayout(row, col, 0, 0));
 
-        JLabel label_row = new JLabel("细胞组行数：" + row);
-        JLabel label_col = new JLabel("细胞组列数：" + col);
+        JLabel label_row = new JLabel("细胞组行数" + row);
+        JLabel label_col = new JLabel("细胞组列数" + col);
 
-        final JLabel lableGneration = new JLabel("繁衍代数：0");
+        final JLabel lableGneration = new JLabel("繁衍代数");
         rowColPanel.add(label_row);
         rowColPanel.add(label_col);
 
         gnerationPanel.add(lableGneration);
-        allPanel.add(rowColPanel,BorderLayout.NORTH);
+        allPanel.add(rowColPanel, BorderLayout.NORTH);
         allPanel.add(gnerationPanel, BorderLayout.SOUTH);
 
         container.add(allPanel, BorderLayout.NORTH);
@@ -122,7 +122,7 @@ public class MainFrame extends JFrame {
 
         gameMap = new GameMap(row, col, cell);
         generation = 1;
-        lableGneration.setText("繁衍代数：" + generation);
+        lableGneration.setText("繁衍代数" + generation);
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 gridPanel.add(gameMap.getMap(i, j));
@@ -135,7 +135,7 @@ public class MainFrame extends JFrame {
             public void run() {
                 cell = GameService.nextWorld(cell);
                 ++generation;
-                lableGneration.setText("繁衍代数：" + generation);
+                lableGneration.setText("繁衍代数" + generation);
                 gameMap.freshMap(cell);
 
                 for (int i = 0; i < row; i++) {

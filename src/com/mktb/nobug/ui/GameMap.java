@@ -17,7 +17,7 @@ public class GameMap {
        for (int i = 0; i < rows; i++) {
            for (int j = 0; j < cols; j++) {
                map[i][j] = new JButton();
-               map[i][j].setMargin(new Insets(0, 0, 0,0));
+               map[i][j].setMargin(new Insets(0, 0, 0, 0));
                if (cell.getCell(i, j) == 1) {
                    map[i][j].setBackground(Color.black);
                } else {

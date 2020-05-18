@@ -4,8 +4,8 @@ import com.mktb.nobug.GameCore.Cell;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
 
 /*
 文件格式为：
@@ -29,7 +29,7 @@ public class Input {
         return null;
     }
 
-    public static void getCells(Cell cell,int row, int col) {
+    public static void getCellsFromeFile(Cell cell,int row, int col) {
         File file = new File("./src/com/mktb/nobug/input.txt");
         Scanner in = null;
         int[] a = new int[2];
@@ -40,9 +40,10 @@ public class Input {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        int status;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                int status = in.nextInt();
+                status = in.nextInt();
                 if (status == 1) {
                     cell.setCell(i, j, 1);
                 } else {
@@ -51,7 +52,18 @@ public class Input {
             }
         }
     }
-    public static void main(String[] args) {
-
+    public static void getCellsRandom(Cell cell, int row,int col) {
+        int status;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                Random ran = new Random();
+                status = ran.nextInt(4);
+                if (status == 1) {
+                    cell.setCell(i, j, 1);
+                } else {
+                    cell.setCell(i, j, 0);
+                }
+            }
+        }
     }
 }
