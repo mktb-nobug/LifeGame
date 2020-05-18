@@ -6,6 +6,12 @@ public class Cell {
     private int row;
     private int col;
 
+    
+    /**
+     * 构造器.
+     * @param row 行数
+     * @param col 列数
+     */
     public Cell(int row, int col) {
         this.row = row;
         this.col = col;
@@ -29,16 +35,26 @@ public class Cell {
         this.col = col;
     }
 
+    /**
+     * 获取对应位置细胞状态.
+     * @param x 行数
+     * @param y 列数
+     * @return
+     */
     public int getCell(int x, int y) {
-        if(x >= 0 && x <row && y>=0 && y<col)
+        if (x >= 0 && x < row && y >= 0 && y < col) {
             return cellArray[x][y];
+        }
         return -1;
     }
 
-    public void setCell(int x,int y,int cell) {
-        this.cellArray[x][y]=cell;
+    public void setCell(int x, int y, int cell) {
+        this.cellArray[x][y] = cell;
     }
 
+    /**
+     * 获取当前状态下各个细胞的活邻居个数.
+     */
     public void freshNeighbors() {
         for (int r = 0; r < row; r++) {
             for (int c = 0; c < col; c++) {

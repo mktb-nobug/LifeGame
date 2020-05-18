@@ -1,9 +1,10 @@
 package com.mktb.nobug.ui;
 
 import com.mktb.nobug.GameCore.Cell;
+import java.awt.Color;
+import java.awt.Insets;
+import javax.swing.JButton;
 
-import javax.swing.*;
-import java.awt.*;
 
 public class GameMap {
    private JButton[][] map;
@@ -31,6 +32,10 @@ public class GameMap {
        return map[i][j];
    }
 
+   /**
+    * 更新GUI界面细胞颜色.
+    * @param cell 当前细胞矩阵
+    */ 
    public void freshMap(Cell cell) {
        for (int r = 0; r < row; r++) {
            for (int c = 0; c < col; c++) {

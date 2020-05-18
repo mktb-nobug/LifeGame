@@ -1,14 +1,25 @@
 package com.mktb.nobug.ui;
 
-import com.mktb.nobug.GameCore.GameService;
 import com.mktb.nobug.GameCore.Cell;
+import com.mktb.nobug.GameCore.GameService;
 import com.mktb.nobug.io.Input;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+
+
 
 public class MainFrame extends JFrame {
     private GameMap gameMap;
@@ -29,7 +40,7 @@ public class MainFrame extends JFrame {
         frame.setVisible(true);
     }
 
-    private static class firstFrame extends JFrame{
+    private static class firstFrame extends JFrame {
         private JPanel mainPanel;
         private Container container;
         firstFrame(String title) {
@@ -47,7 +58,7 @@ public class MainFrame extends JFrame {
 
             JLabel label_col = new JLabel("细胞列数");
             JTextField textField_col = new JTextField(5);
-
+            
             JButton button = new JButton("确定");
             button.addActionListener(new ActionListener() {
                 @Override
@@ -95,6 +106,9 @@ public class MainFrame extends JFrame {
         container = getContentPane();
     }
 
+    /**
+     * 初始化界面.
+     */
     public void init() {
         allPanel = new JPanel();
         gridPanel = new JPanel();

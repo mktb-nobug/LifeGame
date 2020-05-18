@@ -1,7 +1,6 @@
 package com.mktb.nobug.io;
 
 import com.mktb.nobug.GameCore.Cell;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -14,6 +13,11 @@ import java.util.Scanner;
 0表示第该位置初始为死，1表示初始为活
  */
 public class Input {
+
+    /**
+     * 获取文件输入的行数和列数.
+     * @return
+     */
     public static int[] getRowAndCol() {
         File file = new File("./src/com/mktb/nobug/input.txt");
         Scanner in = null;
@@ -22,6 +26,7 @@ public class Input {
             in = new Scanner(file);
             a[0] = in.nextInt();
             a[1] = in.nextInt();
+            in.close();
             return a;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -29,7 +34,13 @@ public class Input {
         return null;
     }
 
-    public static void getCellsFromeFile(Cell cell,int row, int col) {
+    /**
+     * 从文件读取，并初始化第一代细胞.
+     * @param cell 待初始化的细胞矩阵
+     * @param row 行数
+     * @param col 列数
+     */
+    public static void getCellsFromeFile(Cell cell, int row, int col) {
         File file = new File("./src/com/mktb/nobug/input.txt");
         Scanner in = null;
         int[] a = new int[2];
@@ -52,7 +63,14 @@ public class Input {
             }
         }
     }
-    public static void getCellsRandom(Cell cell, int row,int col) {
+    
+    /**
+     * 随机初始化第一代细胞.
+     * @param cell 待初始化的细胞矩阵
+     * @param row 行数
+     * @param col 列数
+     */
+    public static void getCellsRandom(Cell cell, int row, int col) {
         int status;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {

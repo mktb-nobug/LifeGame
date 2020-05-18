@@ -4,8 +4,14 @@ import com.mktb.nobug.io.Input;
 
 public class GameService {
 
-    //生成图像
-    public static Cell initMap(int row, int col,int flag) {
+    /**
+     * 生成图像.
+     * @param row 行数
+     * @param col 列数
+     * @param flag =0为随即输入，=1为文件输入
+     * @return
+     */
+    public static Cell initMap(int row, int col, int flag) {
         Cell cell = new Cell(row, col);
         if (flag == 1) {
             Input.getCellsFromeFile(cell, row, col);
@@ -16,6 +22,11 @@ public class GameService {
         return cell;
     }
 
+    /**
+     * 根据邻居矩阵获取下一代.
+     * @param cell 当前细胞矩阵
+     * @return
+     */
     public static Cell nextWorld(Cell cell) {
         Cell nextCell = new Cell(cell.getRow(), cell.getCol());
         int[][] neighbors = cell.getNeighbors();
