@@ -18,8 +18,8 @@ public class Input {
      * 获取文件输入的行数和列数.
      * @return
      */
-    public static int[] getRowAndCol() {
-        File file = new File("./src/com/mktb/nobug/input.txt");
+    public static int[] getRowAndCol(String str) {
+        File file = new File(str);
         Scanner in = null;
         int[] a = new int[2];
         try {
@@ -31,7 +31,7 @@ public class Input {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+        return a;
     }
 
     /**
@@ -40,8 +40,8 @@ public class Input {
      * @param row 行数
      * @param col 列数
      */
-    public static void getCellsFromeFile(Cell cell, int row, int col) {
-        File file = new File("./src/com/mktb/nobug/input.txt");
+    public static void getCellsFromFile(String str, Cell cell, int row, int col) {
+        File file = new File(str);
         Scanner in = null;
         int[] a = new int[2];
         try {

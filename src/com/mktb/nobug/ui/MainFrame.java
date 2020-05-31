@@ -33,6 +33,7 @@ public class MainFrame extends JFrame {
     private Cell cell;
     private int generation = 0;
     private static int flag = 0;       //标志随机输入还是文件输入
+    private static String str = "./src/com/mktb/nobug/input.txt";
 
 
     public static void main(String[] args) {
@@ -69,10 +70,10 @@ public class MainFrame extends JFrame {
                     int row;
                     int col;
                     if (rows.equals("") || cols.equals("")) {
-                            int[] a = Input.getRowAndCol();
-                            row = a[0];
-                            col = a[1];
-                            flag = 1;
+                        int[] a = Input.getRowAndCol(str);
+                        row = a[0];
+                        col = a[1];
+                        flag = 1;
                     } else {
                         row = Integer.parseInt(rows);
                         col = Integer.parseInt(cols);
@@ -110,59 +111,62 @@ public class MainFrame extends JFrame {
      * 初始化界面.
      */
     public void init() {
-        allPanel = new JPanel();
-        gridPanel = new JPanel();
-        rowColPanel = new JPanel();
-        gnerationPanel = new JPanel();
-        allPanel.setLayout(new BorderLayout(0, 0));
-        gridPanel.setLayout(new GridLayout(row, col, 0, 0));
+        if (row == 0 || col == 0) {
+            System.err.println("行数和列数不能为0");
+        } else {
+            allPanel = new JPanel();
+            gridPanel = new JPanel();
+            rowColPanel = new JPanel();
+            gnerationPanel = new JPanel();
+            allPanel.setLayout(new BorderLayout(0, 0));
+            gridPanel.setLayout(new GridLayout(row, col, 0, 0));
 
-        JLabel label_row = new JLabel("细胞组行数" + row);
-        JLabel label_col = new JLabel("细胞组列数" + col);
+            JLabel label_row = new JLabel("细胞组行数" + row);
+            JLabel label_col = new JLabel("细胞组列数" + col);
 
-        final JLabel lableGneration = new JLabel("繁衍代数");
-        rowColPanel.add(label_row);
-        rowColPanel.add(label_col);
+            final JLabel lableGneration = new JLabel("繁衍代数");
+            rowColPanel.add(label_row);
+            rowColPanel.add(label_col);
 
-        gnerationPanel.add(lableGneration);
-        allPanel.add(rowColPanel, BorderLayout.NORTH);
-        allPanel.add(gnerationPanel, BorderLayout.SOUTH);
+            gnerationPanel.add(lableGneration);
+            allPanel.add(rowColPanel, BorderLayout.NORTH);
+            allPanel.add(gnerationPanel, BorderLayout.SOUTH);
 
-        container.add(allPanel, BorderLayout.NORTH);
-        container.add(gridPanel, BorderLayout.CENTER);
+            container.add(allPanel, BorderLayout.NORTH);
+            container.add(gridPanel, BorderLayout.CENTER);
 
 
-        cell = GameService.initMap(row, col, flag);
+            cell = GameService.initMap(str, row, col, flag);
 
-        gameMap = new GameMap(row, col, cell);
-        generation = 1;
-        lableGneration.setText("繁衍代数" + generation);
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                gridPanel.add(gameMap.getMap(i, j));
+            gameMap = new GameMap(row, col, cell);
+            generation = 1;
+            lableGneration.setText("繁衍代数" + generation);
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    gridPanel.add(gameMap.getMap(i, j));
+                }
             }
-        }
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                cell = GameService.nextWorld(cell);
-                ++generation;
-                lableGneration.setText("繁衍代数" + generation);
-                gameMap.freshMap(cell);
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                public void run() {
+                    cell = GameService.nextWorld(cell);
+                    ++generation;
+                    lableGneration.setText("繁衍代数" + generation);
+                    gameMap.freshMap(cell);
 
-                for (int i = 0; i < row; i++) {
-                    for (int j = 0; j < col; j++) {
-                        if (cell.getCell(i, j) == 1) {
-                            gameMap.getMap(i, j).setBackground(Color.black);
-                        } else {
-                            gameMap.getMap(i, j).setBackground(Color.white);
+                    for (int i = 0; i < row; i++) {
+                        for (int j = 0; j < col; j++) {
+                            if (cell.getCell(i, j) == 1) {
+                                gameMap.getMap(i, j).setBackground(Color.black);
+                            } else {
+                                gameMap.getMap(i, j).setBackground(Color.white);
+                            }
                         }
                     }
                 }
-            }
-        }, 1000, 500);
-        setVisible(true);
+            }, 1000, 500);
+            setVisible(true);
+        }
     }
 }

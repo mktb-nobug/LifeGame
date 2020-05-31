@@ -11,10 +11,10 @@ public class GameService {
      * @param flag =0为随即输入，=1为文件输入
      * @return
      */
-    public static Cell initMap(int row, int col, int flag) {
+    public static Cell initMap(String str, int row, int col, int flag) {
         Cell cell = new Cell(row, col);
         if (flag == 1) {
-            Input.getCellsFromeFile(cell, row, col);
+            Input.getCellsFromFile(str, cell, row, col);
         } else {
             Input.getCellsRandom(cell, row, col);
         }

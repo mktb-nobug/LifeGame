@@ -90,4 +90,8 @@ public class Cell {
         freshNeighbors();
         return neighbors;
     }
+
+    public int[][] getCells() {
+        return cellArray;
+    }
 }
